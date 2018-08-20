@@ -387,7 +387,6 @@ public class SeleniumUtils  extends ExtentReportUtils {
         Iterator<WebElement> itr = null;
         WebElement link = null;
 
-        Boolean successAction = false;
 
         int attempt = 1;
 
@@ -408,7 +407,7 @@ public class SeleniumUtils  extends ExtentReportUtils {
                     link.click();
 
                     logPass(strObjectName+" Link has been successfully clicked.");
-                    successAction = true;
+
                     break;
                 }
 

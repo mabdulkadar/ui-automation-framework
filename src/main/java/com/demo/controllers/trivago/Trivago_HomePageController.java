@@ -48,7 +48,6 @@ public class Trivago_HomePageController extends SeleniumUtils {
         clickObject(homePage.newsLetterSubmitButton,"Newsletter Submit Button");
         verifyElementVisible(homePage.newsLetterSubmittedConfirmation,"Newsletter Subscription submitted Message.");
 
-
     }
 
     public void subscribeNewsLetterForSameCookie(String emailIdstr){

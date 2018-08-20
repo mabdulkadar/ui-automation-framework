@@ -28,7 +28,7 @@ public class HomePage {
     @FindBy(how = How.CSS,using=".submitted")
     public WebElement newsLetterSubmittedConfirmation;
 
-    public String _contactLink= AppConstants.applicationURL.replace("http:","")+"/contact";
+    public String _contactLink= "contact";
 
     @FindBy(how = How.CSS,using=".nav-icon")
     public WebElement topLeftMenuIcon;

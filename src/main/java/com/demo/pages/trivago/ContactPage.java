@@ -21,6 +21,6 @@ public class ContactPage {
     @FindBy(how = How.CSS,using=".contact-submit")
     public WebElement submitButton;
 
-    @FindBy(how = How.CLASS_NAME,using="feedback-error")
+    @FindBy(how = How.CLASS_NAME,using="alert-error")
     public WebElement submitFailMessage;
 }
