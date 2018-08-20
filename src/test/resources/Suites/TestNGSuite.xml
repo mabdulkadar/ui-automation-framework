@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Suite" parallel="false">
+
+	<listeners>
+
+		<listener
+			class-name="com.demo.testreport.ExtentReportITestListener" />
+	</listeners>
+
+
+	<test name="Trivago">
+		<classes>
+			<class name="com.demo.test.trivago.TrivagoHomePageTest">
+				<methods>
+					<include name="search"></include>
+					<include name="subscribeNewsLetter"></include>
+					<include name="nagivateDetinationMenu"></include>
+					<include name="subscribeNewsLetterForSameCookie"></include>
+				</methods>
+			</class>
+			<class name="com.demo.test.trivago.TrivagoContactPageTest">
+				<methods>
+					<include name="sendContactInformation"></include>
+					<include name="sendContactInformationWithOutConfirmationCheckBox"></include>
+				</methods>
+			</class>
+
+		</classes>
+	</test>
+
+</suite> 

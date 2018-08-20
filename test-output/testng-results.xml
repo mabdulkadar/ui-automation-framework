@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Suite" duration-ms="4138" started-at="2018-08-12T07:04:43Z" finished-at="2018-08-12T07:04:47Z">
+    <groups>
+    </groups>
+    <test name="Demo" duration-ms="4138" started-at="2018-08-12T07:04:43Z" finished-at="2018-08-12T07:04:47Z">
+      <class name="com.demo.test.LoginTest">
+        <test-method status="PASS" signature="loginTest()[pri:0, instance:com.demo.test.LoginTest@6d4e5011]" name="loginTest" duration-ms="4129" started-at="2018-08-12T03:04:43Z" finished-at="2018-08-12T03:04:47Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- loginTest -->
+        <test-method status="PASS" signature="TearDownSuite()[pri:0, instance:com.demo.test.LoginTest@6d4e5011]" name="TearDownSuite" is-config="true" duration-ms="253" started-at="2018-08-12T03:04:53Z" finished-at="2018-08-12T03:04:53Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- TearDownSuite -->
+      </class> <!-- com.demo.test.LoginTest -->
+    </test> <!-- Demo -->
+  </suite> <!-- Suite -->
+</testng-results>
