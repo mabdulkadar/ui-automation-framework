@@ -19,7 +19,8 @@
 In order to get a copy of the project, clone the project from the respective git repository at your desired local path.
 
 ```bash
-git clone 
+git clone https://github.com/mabdulkadar/demo-ui-qa.git
+
 ```
 
 ### Prerequisites
@@ -29,14 +30,14 @@ This project should be running on local environments after fulfilling the follow
 ```
 1. Latest version of JDK 8. [TJDK 8] (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
 2. Latest version of maven. [maven] (https://maven.apache.org/download.cgi)
-3. IDE of your choice. [eclipse] (https://www.eclipse.org/downloads/?)
+3. IDE of your choice. [Intellij] 
 
 Note: maven pom.xml should take care of required version of the following:
 
 1. Selenium WebDriver
 2. TestNG
 3. Extent Report
-4. All required depencies
+4. Maven
 ```
 
 ### Installing
@@ -44,10 +45,6 @@ Note: maven pom.xml should take care of required version of the following:
 1. After having all Prerequisites then cloning the project, everything should work smoothly.
 2. Make sure to include unnecessary files to .gitignore file
 
-
-```
-Example for files/Directories that should be placed in .gitignore --> testResults, log files,,,,etc
-```
 
 
 ## Project Config & Running the tests
@@ -76,7 +73,7 @@ mvn clean test -Denv=QA -DBrowser=chrome -DsuiteXmlFile=src/test/resources/Suite
 mvn clean test -Denv=QA -DBrowser=firefox -DsuiteXmlFile=src/test/resources/Suites/TestNGSuite.xml
 mvn clean test -Denv=QA -DBrowser=headless -DsuiteXmlFile=src/test/resources/Suites/TestNGSuite.xml
 
--DsuiteXmlFile=src/test/resources/Suites/TestNGSuite.xml is optional, you have different *.xml file
+-DsuiteXmlFile=src/test/resources/Suites/TestNGSuite.xml is optional, you have different *.xml file, please use it.
 
 ```
 
@@ -96,7 +93,7 @@ from IDE: Right click TestNGSuite.xml file under ~/test/resources/Suites folder 
 
 ## How write Automation for an Application
 
-1.Create Controller Class for your Application Under Test like below
+1.Create Controller Class for your Application Under ~/src/main/java/com/demo/controllers/<application_package> like below
 ```bash
 public class Demo_ApplicationController {
 
@@ -210,7 +207,7 @@ public class LoginTest extends BaseScript {
 
 ```
 
-com.demo.testreport.ExtentReportITestListener in the xml file required Test Report Generation using Extent Report.
+com.demo.testreport.ExtentReportITestListener in the xml file required for Test Report Generation.
 
 7.Output of the Test Result will be available under ~/test-result folder
 

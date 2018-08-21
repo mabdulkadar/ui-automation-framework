@@ -140,6 +140,14 @@
             <version>2.52.0</version>
         </dependency>
 
+       <!-- &lt;!&ndash; https://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-firefox-driver &ndash;&gt;
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-firefox-driver</artifactId>
+            <version>3.4.0</version>
+        </dependency>
+
+-->
 
 
         <dependency>
