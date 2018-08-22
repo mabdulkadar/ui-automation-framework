@@ -275,7 +275,7 @@ public class SeleniumUtils  extends ExtentReportUtils {
 
             if(0 < noOfAttempts) {
                 System.out.println("attempts:"+noOfAttempts);
-                clickObject(noOfAttempts--,objWebElement, strObjectName);
+                clickObject((noOfAttempts-1),objWebElement, strObjectName);
             }else{
                 logFailWithScreenshot(strObjectName+" Object is not clicked. Exception : "+objException.getMessage());
 
