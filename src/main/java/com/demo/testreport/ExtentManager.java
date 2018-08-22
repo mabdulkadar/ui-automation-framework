@@ -76,6 +76,10 @@ public class ExtentManager {
 			extent.setSystemInfo("Environment", reportConfig.getConfiguration().getProperty("env"));
 		}
 
+		if(System.getProperty("Browser") != null){
+			extent.setSystemInfo("BrowserName", System.getProperty("Browser"));
+		}
+
 		extent.setSystemInfo("TesterName", System.getProperty("user.name"));
 		extent.attachReporter(htmlReporter);
 		extent.setReportUsesManualConfiguration(true);

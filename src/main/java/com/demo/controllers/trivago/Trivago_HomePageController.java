@@ -34,7 +34,7 @@ public class Trivago_HomePageController extends SeleniumUtils {
     public void navigateDestination() throws Exception{
 
         scrollUp("Scroll up to access Menu Icon.");
-        clickObject(homePage.topLeftMenuIcon,"Top Left Menu Icon");
+        clickObject(10,homePage.topLeftMenuIcon,"Top Left Menu Icon");
         clickFirstLinkCarouselMenuCard(homePage._destinationCarouselMenuCards,0);
     }
 
@@ -43,7 +43,7 @@ public class Trivago_HomePageController extends SeleniumUtils {
         launchURL(AppConstants.applicationURL);
         waitPageLoaded();
         scrollDownStillElementClickable(homePage.newsLetterCheckBox,"Newsletter Confirmation Check Box");
-        clickObject(2,homePage.newsLetterCheckBox,"Newsletter Confirmation Check Box");
+        clickObject(10,homePage.newsLetterCheckBox,"Newsletter Confirmation Check Box");
         typeValue(homePage.newsLetterEmailTextField,"Newsletter Email Text Field",emailIdstr);
         clickObject(homePage.newsLetterSubmitButton,"Newsletter Submit Button");
         verifyElementVisible(homePage.newsLetterSubmittedConfirmation,"Newsletter Subscription submitted Message.");
@@ -52,7 +52,7 @@ public class Trivago_HomePageController extends SeleniumUtils {
 
     public void subscribeNewsLetterForSameCookie(String emailIdstr){
 
-        launchURL(AppConstants.applicationURL);
+        //launchURL(AppConstants.applicationURL);
         waitPageLoaded();
         verifyElementNotDisplayed(homePage.newsLetterCheckBox,"Newsletter Confirmation Check Box");
         verifyElementNotDisplayed(homePage.newsLetterEmailTextField,"Newsletter Email Text Field");
@@ -65,6 +65,7 @@ public class Trivago_HomePageController extends SeleniumUtils {
         launchURL(AppConstants.applicationURL);
         scrollDownToBottom("Contact Link");
         clickLinkUsingHref(4,homePage._contactLink,"Contact Link");
+        waitPageLoaded();
 
     }
 
@@ -79,26 +80,56 @@ public class Trivago_HomePageController extends SeleniumUtils {
             clickObject(contactPage.confirmCheckBox, "Confirmation CheckBox");
             clickObject(contactPage.submitButton, "Submit Button");
         }else{
-            logFail("Contact Tab is opened.");
+            logFailWithScreenshot("Contact Tab is not opened.");
         }
     }
 
-    public void enterContactInformationWithoutConfirmation(String yourMessage,String fullName,String emailId) throws Exception{
+    public void enterContactInformationWithoutConfirmation(String yourMessage,String fullName,String emailId) throws Exception {
 
-        String currentBrowserUrl = getCurrentUrl();
+        String currentBrowserUrl = null;
 
-        if(StringUtils.isNotEmpty(currentBrowserUrl)) {
 
-            launchURL(currentBrowserUrl);
+        if (getNumberOfTabs() == 2) {
+
+            currentBrowserUrl = getCurrentUrl();
+
+            if (StringUtils.equalsIgnoreCase(AppConstants.applicationURL+"/contact/", currentBrowserUrl)) {
+
+                closeActiveBroser();
+                switchTab(0, "Home Tab");
+                waitPageLoaded();
+
+                clickLinkUsingHref(4, homePage._contactLink, "Contact Link");
+                waitPageLoaded();
+
+                boolean tabSwitchStatus = switchTab(1,"Contact Tab");
+                if(tabSwitchStatus) {
+                    waitPageLoaded();
+                    typeValue(contactPage.yourMessageField, "Your Message Field.", yourMessage);
+                    typeValue(contactPage.fullNameField, "Full Name Field", fullName);
+                    typeValue(contactPage.yourEmailField, "Your Email Field", emailId);
+                    clickObject(3, contactPage.submitButton, "Submit Button");
+                    verifyElementVisible(contactPage.submitFailMessage, "Submit Fail.");
+                }else {
+                    logFailWithScreenshot("Contact Tab is Not Opened.");
+                }
+
+            } else {
+                logFailWithScreenshot("Current Active Tab is not Contact.");
+            }
+        }else {
+            logFailWithScreenshot("Current Active Tab is not 2.");
+        }
+
+
+          /*  launchURL(currentBrowserUrl);
             waitPageLoaded();
             typeValue(contactPage.yourMessageField, "Your Message Field.", yourMessage);
             typeValue(contactPage.fullNameField, "Full Name Field", fullName);
             typeValue(contactPage.yourEmailField, "Your Email Field", emailId);
-            clickObject(1,contactPage.submitButton, "Submit Button");
-            verifyElementVisible(contactPage.submitFailMessage, "Submit Fail.");
-        }else{
-            logFail("Current Brower url is empty.");
-        }
+            clickObject(3,contactPage.submitButton, "Submit Button");
+            verifyElementVisible(contactPage.submitFailMessage, "Submit Fail.");*/
+
 
     }
 }

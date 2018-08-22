@@ -465,6 +465,28 @@ public class SeleniumUtils  extends ExtentReportUtils {
     }
 
     /**
+     * Objective - Get Number of tabs active
+     * @return Integer value
+     */
+    public static Integer getNumberOfTabs() {
+
+        ArrayList<String> tabList = null;
+
+        try{
+
+            tabList = new ArrayList<String>(driver.getWindowHandles());
+
+            return tabList.size();
+
+        }catch (Exception objException) {
+            logFail("Error while getting no of active tabs.");
+            return 0;
+        }
+
+
+    }
+
+    /**
      * Objective - Scroll Down page, still Link displayed
      * @param hrefValue is actual link i.e href value
      * @param strObjectName name of Label
