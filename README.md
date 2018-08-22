@@ -89,7 +89,7 @@ from IDE: Right click TestNGSuite.xml file under ~/test/resources/Suites folder 
 ```
 
 ## Supporting Browsers
-* **-DBrowser accepts** - *chrome,firefox,headless* - Initial version supports only Chrome Browser, working on firefox/headless browser.
+* **-DBrowser accepts** - *chrome,firefox,headless* - Initial version supports only chrome/firefox Browser, working on headless browser.
 
 ## How write Automation for an Application
 

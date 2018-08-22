@@ -64,7 +64,7 @@ public class Trivago_HomePageController extends SeleniumUtils {
 
         launchURL(AppConstants.applicationURL);
         scrollDownToBottom("Contact Link");
-        clickLinkUsingHref(homePage._contactLink,"Contact Link");
+        clickLinkUsingHref(4,homePage._contactLink,"Contact Link");
 
     }
 

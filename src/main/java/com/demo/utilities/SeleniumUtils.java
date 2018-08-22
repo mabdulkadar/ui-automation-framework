@@ -381,14 +381,13 @@ public class SeleniumUtils  extends ExtentReportUtils {
      * @return boolean value
      */
 
-    public static Boolean clickLinkUsingHref(String hrefValue, String strObjectName) {
+    public static Boolean clickLinkUsingHref(int noOfAttempts,String hrefValue, String strObjectName) {
 
         List<WebElement> links = null;
         Iterator<WebElement> itr = null;
         WebElement link = null;
 
 
-        int attempt = 1;
 
         try {
 
@@ -416,9 +415,9 @@ public class SeleniumUtils  extends ExtentReportUtils {
             return true;
         } catch (Exception objException) {
 
-            if(attempt <= AppConstants.noOfSeleniumActionAttempts) {
-                clickLinkUsingHref(hrefValue,  strObjectName);
-                attempt++;
+            if(0 < noOfAttempts) {
+                 clickLinkUsingHref((noOfAttempts-1),hrefValue,  strObjectName);
+
             }else {
 
                 logFailWithScreenshot(strObjectName + " link is not clicked : " + objException.getMessage());
