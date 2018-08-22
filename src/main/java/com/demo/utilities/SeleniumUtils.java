@@ -1,7 +1,6 @@
 package com.demo.utilities;
 
 import com.demo.base.AppConstants;
-import com.demo.testreport.ExtentReportUtils;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -14,27 +13,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class SeleniumUtils  extends ExtentReportUtils {
+public class SeleniumUtils  extends TestLibrary {
 
-    protected static WebDriver driver;
-
-    JavascriptExecutor objJSExecutor = null;
-
-    public SeleniumUtils(){
-
-    }
-
-
-
-    /**
-     * CONSTRUCTOR FOR COMPONENT REUSABLE FUNCTIONS
-     * @param objTempWebDriver webdriver
-     */
-    public SeleniumUtils(WebDriver objTempWebDriver)  {
-
-        driver = objTempWebDriver;
-        objJSExecutor = (JavascriptExecutor) driver;
-    }
 
     /**
      * TAKE SCREENSHOT

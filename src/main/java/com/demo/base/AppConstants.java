@@ -21,4 +21,6 @@ public class AppConstants {
     public static String applicationURL = null;
 
     public static Integer noOfSeleniumActionAttempts=1;
+
+    public static int fiddlerPort=8888;
 }

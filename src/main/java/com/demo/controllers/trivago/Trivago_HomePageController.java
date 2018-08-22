@@ -3,13 +3,15 @@ package com.demo.controllers.trivago;
 import com.demo.base.AppConstants;
 import com.demo.pages.trivago.ContactPage;
 import com.demo.pages.trivago.HomePage;
-import com.demo.utilities.SeleniumUtils;
+import com.demo.utilities.TestLibrary;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 
+import static com.demo.utilities.SeleniumUtils.*;
 
-public class Trivago_HomePageController extends SeleniumUtils {
+
+public class Trivago_HomePageController extends TestLibrary {
 
     HomePage homePage = null;
     ContactPage contactPage = null;
@@ -28,6 +30,8 @@ public class Trivago_HomePageController extends SeleniumUtils {
         typeValue(homePage.searchInputField,"search Input Field",searchStrValue);
         enterReturnKey(homePage.searchInputField,"search Input Field");
         clickObject(homePage.searchCloseIcon,"Search Close Icon");
+
+
 
     }
 
