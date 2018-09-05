@@ -2,6 +2,7 @@ package com.demo.utilities;
 
 import com.demo.base.AppConstants;
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
@@ -14,6 +15,8 @@ import java.util.Iterator;
 import java.util.List;
 
 public class SeleniumUtils  extends TestLibrary {
+
+
 
 
     /**
@@ -45,6 +48,7 @@ public class SeleniumUtils  extends TestLibrary {
               }
         } catch (Exception e) {
             e.printStackTrace();
+
         }
     }
 
@@ -69,6 +73,8 @@ public class SeleniumUtils  extends TestLibrary {
             return false;
         }
     }
+
+
 
     /**
      * Get Current Browser's URL
@@ -248,7 +254,7 @@ public class SeleniumUtils  extends TestLibrary {
 
         try {
 
-            (new WebDriverWait(driver, 45)).until(ExpectedConditions.elementToBeClickable(objWebElement));
+            (new WebDriverWait(driver, 15)).until(ExpectedConditions.elementToBeClickable(objWebElement));
             objWebElement.click();
             logPass(strObjectName+" has been successfully clicked.");
         } catch (Exception objException) {
@@ -260,6 +266,54 @@ public class SeleniumUtils  extends TestLibrary {
                 logFailWithScreenshot(strObjectName+" Object is not clicked. Exception : "+objException.getMessage());
 
             }
+
+        }
+    }
+
+    /**
+     * CLICK OBJECT WITH REQUESTED ATTEMPTS
+     * @param noOfAttempts No of Attempts if Action failed.
+     * @param objWebElement string element of objecg
+     * @param strObjectName Web Element Name
+     */
+    public static void javaScriptClick(int noOfAttempts,String objWebElement, String strObjectName)  {
+
+
+        try {
+
+            objJSExecutor.executeScript("document.querySelector('"+objWebElement+"').click()");
+            logPass(strObjectName+" has been successfully clicked.");
+        } catch (Exception objException) {
+
+            if(0 < noOfAttempts) {
+                System.out.println("attempts:"+noOfAttempts);
+                javaScriptClick((noOfAttempts-1),objWebElement, strObjectName);
+            }else{
+                logFailWithScreenshot(strObjectName+" Object is not clicked. Exception : "+objException.getMessage());
+
+            }
+
+        }
+    }
+
+    /**
+     * CHECK OBJECT is Not Clikable
+     * @param noOfAttempts No of Attempts if Action failed.
+     * @param objWebElement Web Element Object
+     * @param strObjectName Web Element Name
+     */
+    public static void verifyObjectNotClickable(int noOfAttempts,WebElement objWebElement, String strObjectName)  {
+
+
+        try {
+
+            (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(objWebElement));
+            objWebElement.click();
+            logFailWithScreenshot(strObjectName+" has been successfully clicked.");
+        } catch (Exception objException) {
+
+            logPass(strObjectName+" Object is not clickable. Actual Message : "+objException.getMessage());
+
 
         }
     }
@@ -284,6 +338,30 @@ public class SeleniumUtils  extends TestLibrary {
             return true;
         } catch (Exception objException) {
             logFailWithScreenshot(strObjectName+" Object is not clicked. Exception : "+objException.getMessage());
+            return false;
+        }
+    }
+
+
+    /**
+     * CLEAR VALUE FROM THE OBJECT
+     * @param objWebElement webElement
+     * @param strObjectName objectName
+     * @return boolean
+     */
+
+    public static Boolean clearValue(WebElement objWebElement, String strObjectName)  {
+        try {
+
+            (new WebDriverWait(driver, 45)).until(ExpectedConditions.elementToBeClickable(objWebElement));
+
+            objWebElement.clear();
+
+            logPass(strObjectName+" value has been successfully clear.");
+
+            return true;
+        } catch (Exception objException) {
+            logFailWithScreenshot(strObjectName+" value clear action failed. Exception : "+objException.getMessage());
             return false;
         }
     }
@@ -401,6 +479,118 @@ public class SeleniumUtils  extends TestLibrary {
             }else {
 
                 logFailWithScreenshot(strObjectName + " link is not clicked : " + objException.getMessage());
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+
+    /**
+     * Objective - Select a WebElement from multiple WebElement Lists
+     * @param strObjectName name of WebElement object
+     * @param elementValue actual element value to be selected
+     * @return boolean value
+     */
+
+    public static Boolean selectWebElement(int noOfAttempts,String strObjectName,String elementValue) {
+
+        List<WebElement> webElementLists = null;
+        Iterator<WebElement> itr = null;
+        WebElement link = null;
+
+
+
+        try {
+
+            if(StringUtils.isNotEmpty(elementValue)){
+                strObjectName = strObjectName.replace("XXX",elementValue);
+            }
+
+
+            webElementLists = driver.findElements(By.cssSelector(strObjectName));
+
+            itr = webElementLists.iterator();
+
+            while (itr.hasNext()){
+
+                link = itr.next();
+
+
+
+
+                if(link.getText().contains(elementValue)){
+
+                    (new WebDriverWait(driver, 30)).until(ExpectedConditions.elementToBeClickable(link));
+                    link.click();
+
+                    logPass(strObjectName+" WebElement has been successfully clicked.");
+
+                    break;
+                }
+
+            }
+
+            return true;
+        } catch (Exception objException) {
+
+            if(0 < noOfAttempts) {
+                selectWebElement((noOfAttempts-1),elementValue,  strObjectName);
+
+            }else {
+
+                logFailWithScreenshot(strObjectName + " WebElement is not selected : " + objException.getMessage());
+                return false;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Objective - Select a WebElement from multiple WebElement Lists
+     * @param strObjectName name of WebElement object
+     * @param elementValue actual element value to be selected
+     * @return boolean value
+     */
+
+    public static Boolean selectWebElement2(int noOfAttempts,String strObjectName,String elementValue) {
+
+        List<WebElement> webElementLists = null;
+        Iterator<WebElement> itr = null;
+        WebElement link = null;
+
+
+
+        try {
+
+            if(StringUtils.isNotEmpty(elementValue)){
+                strObjectName = strObjectName.replace("XXX",elementValue);
+            }
+
+
+            webElementLists = driver.findElements(By.cssSelector(strObjectName));
+
+            itr = webElementLists.iterator();
+
+            while (itr.hasNext()){
+
+
+
+                System.out.println(link.getLocation());
+
+            }
+
+            return true;
+        } catch (Exception objException) {
+
+            if(0 < noOfAttempts) {
+                selectWebElement2((noOfAttempts-1),elementValue,  strObjectName);
+
+            }else {
+
+                logFailWithScreenshot(strObjectName + " WebElement is not selected : " + objException.getMessage());
                 return false;
             }
         }

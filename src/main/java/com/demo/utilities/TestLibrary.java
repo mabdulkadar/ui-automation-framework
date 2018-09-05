@@ -8,7 +8,7 @@ public class TestLibrary extends ExtentReportUtils {
 
     protected static WebDriver driver;
 
-    JavascriptExecutor objJSExecutor = null;
+    protected static JavascriptExecutor objJSExecutor = null;
 
     public TestLibrary(){
 

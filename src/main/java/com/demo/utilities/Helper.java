@@ -1,6 +1,7 @@
 package com.demo.utilities;
 
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicLong;
 
 public class Helper {
 
@@ -30,5 +31,20 @@ public class Helper {
     public static String generateRandomStringUUID(){
         UUID uuid = UUID.randomUUID();
         return uuid.toString();
+    }
+
+    public static String generateUniqueValue ()
+    {
+
+        final AtomicLong TS = new AtomicLong();
+        long micros = System.currentTimeMillis() * 1000;
+
+        long value = TS.get();
+        if (micros <= value)
+            micros = value+1;
+        /*if (TS.compareAndSet(value, micros))
+        	System.out.println(micros);*/
+
+        return String.valueOf(micros);
     }
 }

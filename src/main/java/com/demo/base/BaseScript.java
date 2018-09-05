@@ -1,5 +1,7 @@
 package com.demo.base;
 
+import com.demo.controllers.liveintent.LiveIntent_ApplicationController;
+import com.demo.controllers.payoneer.Payoneer_ApplicationController;
 import com.demo.controllers.trivago.Trivago_ApplicationController;
 import com.demo.utilities.Helper;
 import com.demo.utilities.SeleniumUtils;
@@ -11,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.firefox.internal.ProfilesIni;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
+import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.annotations.AfterSuite;
 
@@ -98,6 +101,7 @@ public class BaseScript extends SeleniumUtils {
                             options.addArguments("--disable-infobars");
                             options.addArguments("--start-maximized");
                             caps.setCapability(ChromeOptions.CAPABILITY, options);
+                            caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
                             localDriver = new ChromeDriver(caps);
                             localDriver.manage().window().maximize();
                             break;
@@ -151,6 +155,32 @@ public class BaseScript extends SeleniumUtils {
         }
 
         return trivago;
+    }
+
+    /**
+     * Object - Payoneer Application Testing
+     */
+    Payoneer_ApplicationController payoneer= null;
+    public Payoneer_ApplicationController payoneer()
+    {
+        if(payoneer ==  null) {
+            payoneer = new Payoneer_ApplicationController(driver);
+        }
+
+        return payoneer;
+    }
+
+    /**
+     * Object - LiveIntent Application Testing
+     */
+    LiveIntent_ApplicationController liveIntent= null;
+    public LiveIntent_ApplicationController liveIntent()
+    {
+        if(liveIntent ==  null) {
+            liveIntent = new LiveIntent_ApplicationController(driver);
+        }
+
+        return liveIntent;
     }
 
     @AfterSuite

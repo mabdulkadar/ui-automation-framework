@@ -10,7 +10,6 @@ import org.openqa.selenium.support.PageFactory;
 
 import static com.demo.utilities.SeleniumUtils.*;
 
-
 public class Trivago_HomePageController extends TestLibrary {
 
     HomePage homePage = null;
@@ -30,7 +29,6 @@ public class Trivago_HomePageController extends TestLibrary {
         typeValue(homePage.searchInputField,"search Input Field",searchStrValue);
         enterReturnKey(homePage.searchInputField,"search Input Field");
         clickObject(homePage.searchCloseIcon,"Search Close Icon");
-
 
 
     }
