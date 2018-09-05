@@ -5,27 +5,19 @@
 	<listeners>
 
 		<listener
-			class-name="com.demo.testreport.ExtentReportITestListener" />
+				class-name="com.demo.testreport.ExtentReportITestListener" />
 	</listeners>
 
 
-	<test name="Trivago">
+	<test name="Conversion Tracker">
 		<classes>
-			<class name="com.demo.test.trivago.TrivagoHomePageTest">
+			<class name="com.demo.test.liveintent.ConversionTrackerTest">
 				<methods>
-					<include name="search"></include>
-					<include name="subscribeNewsLetter"></include>
-					<include name="nagivateDetinationMenu"></include>
-					<include name="subscribeNewsLetterForSameCookie"></include>
+					<include name="createNewConversionWithoutAdvertiser"></include>
+					<include name="createNewConversionWithoutTrackerName"></include>
+					<include name="createNewConversion"></include>
 				</methods>
 			</class>
-			<class name="com.demo.test.trivago.TrivagoContactPageTest">
-				<methods>
-					<include name="sendContactInformation"></include>
-					<include name="sendContactInformationWithOutConfirmationCheckBox"></include>
-				</methods>
-			</class>
-
 		</classes>
 	</test>
 
