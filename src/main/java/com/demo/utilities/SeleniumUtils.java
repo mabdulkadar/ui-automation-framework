@@ -5,10 +5,10 @@ import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.Wait;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.*;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -296,6 +296,37 @@ public class SeleniumUtils  extends TestLibrary {
         }
     }
 
+
+    /**
+     * CLICK OBJECT WITH REQUESTED ATTEMPTS
+     * @param noOfAttempts No of Attempts if Action failed.
+     * @param objWebElement string element of objecg
+     * @param strObjectName Web Element Name
+     */
+    public static void javaScriptClick(int noOfAttempts,WebElement objWebElement, String strObjectName)  {
+
+
+        try {
+
+            objJSExecutor.executeScript("arguments[0].click()",objWebElement);
+            logPass(strObjectName+" has been successfully clicked.");
+        } catch (Exception objException) {
+
+            if(0 < noOfAttempts) {
+                System.out.println("attempts:"+noOfAttempts);
+                javaScriptClick((noOfAttempts-1),objWebElement, strObjectName);
+            }else{
+                logFailWithScreenshot(strObjectName+" Object is not clicked. Exception : "+objException.getMessage());
+
+            }
+
+        }
+    }
+
+
+
+
+
     /**
      * CHECK OBJECT is Not Clikable
      * @param noOfAttempts No of Attempts if Action failed.
@@ -313,6 +344,34 @@ public class SeleniumUtils  extends TestLibrary {
         } catch (Exception objException) {
 
             logPass(strObjectName+" Object is not clickable. Actual Message : "+objException.getMessage());
+
+
+        }
+    }
+
+    /**
+     * CHECK OBJECT is Not Clickable
+     * @param noOfAttempts No of Attempts if Action failed.
+     * @param objWebElement Web Element Object
+     * @param strObjectName Web Element Name
+     * @return boolean
+     */
+    public static boolean waitforElementClickable(int noOfAttempts,WebElement objWebElement, String strObjectName)  {
+
+
+        try {
+
+            (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(objWebElement));
+            return true;
+        } catch (Exception objException) {
+
+
+            if(0 < noOfAttempts) {
+                waitforElementClickable((noOfAttempts-1),objWebElement,  strObjectName);
+
+            }
+
+            return false;
 
 
         }
@@ -802,6 +861,134 @@ public class SeleniumUtils  extends TestLibrary {
             objException.printStackTrace();
             logFailWithScreenshot("Scrolled Down to Bottom of Page is failed");
             return false;
+        }
+    }
+
+    /**
+     * Objective - Scroll WebElement X's Position
+     * @param objWebElement name of Label
+     * @return boolean value
+     */
+
+    public static Boolean scrollElementXPosition(WebElement objWebElement) {
+
+        try {
+
+            objJSExecutor.executeScript("window.scrollTo(0,"+objWebElement.getLocation().x+")");
+            return true;
+        } catch (Exception objException) {
+
+            return false;
+        }
+    }
+
+    /**
+     * Objective - Scroll WebElement Y's Position
+     * @param objWebElement name of Label
+     * @return boolean value
+     */
+
+    public static Boolean scrollElementYPosition(WebElement objWebElement) {
+
+        try {
+
+            objJSExecutor.executeScript("window.scrollTo(0,"+objWebElement.getLocation().y+")");
+            return true;
+        } catch (Exception objException) {
+
+            return false;
+        }
+    }
+
+    /**
+     * MOUSE HOVER AND CLICK OBJECT WITH REQUESTED ATTEMPTS
+     * @param objWebElement WebElement element of objecg
+     * @param strObjectName Web Element Name
+     */
+    public static void mouseHoverAndClick(WebElement objWebElement, String strObjectName)  {
+
+
+        try {
+
+            Actions builder = new Actions(driver);
+            builder.moveToElement(objWebElement,0,0).click(objWebElement).perform();
+
+        } catch (Exception objException) {
+
+            logFailWithScreenshot(strObjectName+" MouseHover and Click not performed. Exception : "+objException.getMessage());
+
+        }
+    }
+
+
+    /**
+     * Double Click
+     * @param objWebElement WebElement element of objecg
+     * @param strObjectName Web Element Name
+     */
+    public static void doubleClick(WebElement objWebElement, String strObjectName)  {
+
+
+        try {
+
+            Actions builder = new Actions(driver);
+            builder.moveToElement(objWebElement,0,0).doubleClick(objWebElement).perform();
+
+        } catch (Exception objException) {
+
+            logFailWithScreenshot(strObjectName+" Double Click not performed. Exception : "+objException.getMessage());
+
+        }
+    }
+
+    /**
+     * MOUSE HOVER ON  OBJECT
+     * @param objWebElement String  of object
+     * @param strObjectName Web Element Name
+     */
+    public static void mouseHover(String objWebElement, String strObjectName)  {
+
+
+        try {
+
+            Actions builderMouseHover = new Actions(driver);
+            builderMouseHover.moveToElement(driver.findElement(By.cssSelector(objWebElement)));
+            Action mouseHoverAction = builderMouseHover.build();
+            mouseHoverAction.perform();
+
+
+        } catch (Exception objException) {
+
+            logFailWithScreenshot(strObjectName+" MouseHover performed. Exception : "+objException.getMessage());
+
+        }
+    }
+
+    /**
+     * Javascript MOUSE HOVER ON  OBJECT
+     * @param objWebElement String  of object
+     * @param strObjectName Web Element Name
+     * @return  boolean value
+     */
+    public static boolean jsMouseHoverClick(WebElement objWebElement, String strObjectName)  {
+
+        String javaScript = "var evObj = document.createEvent('MouseEvents');" +
+                "evObj.initMouseEvent(\"mouseover\",true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);" +
+                "arguments[0].dispatchEvent(evObj);";
+
+        try {
+
+            objJSExecutor.executeScript(javaScript,objWebElement);
+            objJSExecutor.executeScript("arguments[0].click()",objWebElement);
+            logPass("Mouse Over Click success.");
+
+            return true;
+
+        } catch (Exception objException) {
+
+            logFailWithScreenshot(strObjectName+" MouseHover not performed. Exception : "+objException.getMessage());
+            return false;
+
         }
     }
 

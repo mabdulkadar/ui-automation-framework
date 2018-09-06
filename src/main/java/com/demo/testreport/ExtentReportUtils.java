@@ -37,6 +37,11 @@ public class ExtentReportUtils {
         ExtentReportITestListener.test.get().pass(msg);
     }
 
+    public static void logWarning(String msg) {
+
+        ExtentReportITestListener.test.get().warning(msg);
+    }
+
     public static void logScreenshot(String message,String imagePath) throws IOException {
 
         ExtentReportITestListener.test.get().fail(message).addScreenCaptureFromPath(imagePath);

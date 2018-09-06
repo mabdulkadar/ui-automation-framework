@@ -11,20 +11,21 @@ public class ConversionTrackerTest extends BaseScript {
     public void createNewConversionWithoutAdvertiser() throws Exception {
 
         logmsg("Test Case : Create New Conversion for an Advertiser.");
-        liveIntent().LoginPageController().login("provide email id","provid password");
+        liveIntent().LoginPageController().login("provide email id","provide assword");
         liveIntent().conversionTrackerController().createNewConversionTrackerWithoutAdvertiser("QATracker_"+ Helper.generateUniqueValue());
     }
+
+
 
     @Test(testName="Conversion Tracker",groups = { "Conversion Tracker","Regression" },
             description="Create New Conversion Tracker without TrackerNAme .")
     public void createNewConversionWithoutTrackerName() throws Exception {
 
         logmsg("Test Case : Create New Conversion for an Advertiser.");
-        liveIntent().conversionTrackerController().createNewConversionTrackerWithoutAdvertiser("testAutomationAdvertiser");
+        liveIntent().conversionTrackerController().createNewConversionTrackerWithoutTrackerName("testAutomationAdvertiser");
 
 
     }
-
 
     @Test(testName="Conversion Tracker",groups = { "Conversion Tracker","Regression" },
             description="Create New Conversion Tracker for an Advertiser.")
@@ -35,6 +36,9 @@ public class ConversionTrackerTest extends BaseScript {
                 "QATracker_"+ Helper.generateUniqueValue());
 
     }
+
+
+
 
 
 }
