@@ -1,5 +1,6 @@
 package com.demo.base;
 
+import com.demo.controllers.hellofresh.HelloFresh_ApplicationController;
 import com.demo.controllers.liveintent.LiveIntent_ApplicationController;
 import com.demo.controllers.payoneer.Payoneer_ApplicationController;
 import com.demo.controllers.trivago.Trivago_ApplicationController;
@@ -181,6 +182,19 @@ public class BaseScript extends SeleniumUtils {
         }
 
         return liveIntent;
+    }
+
+    /**
+     * Object - Hellofresh Application Testing
+     */
+    HelloFresh_ApplicationController helloFresh= null;
+    public HelloFresh_ApplicationController helloFresh()
+    {
+        if(helloFresh ==  null) {
+            helloFresh = new HelloFresh_ApplicationController(driver);
+        }
+
+        return helloFresh;
     }
 
     @AfterSuite

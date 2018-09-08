@@ -11,7 +11,7 @@ public class ConversionTrackerTest extends BaseScript {
     public void createNewConversionWithoutAdvertiser() throws Exception {
 
         logmsg("Test Case : Create New Conversion for an Advertiser.");
-        liveIntent().LoginPageController().login("provide email id","provide password");
+        liveIntent().LoginPageController().login("testAutomation@test.com","p@ssw0rd");
         liveIntent().conversionTrackerController().createNewConversionTrackerWithoutAdvertiser("QATracker_"+ Helper.generateUniqueValue());
     }
 
