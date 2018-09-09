@@ -1,6 +1,6 @@
 package com.demo.utilities;
 
-import com.demo.base.AppConstants;
+import com.demo.base.GlobalConstants;
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
@@ -42,7 +42,7 @@ public class RestAssuredUtils extends TestLibrary {
                 if(StringUtils.isNotEmpty(proxy)) {
 
                     response = given()
-                            .proxy("localhost",AppConstants.fiddlerPort)
+                            .proxy("localhost", GlobalConstants.fiddlerPort)
                             .spec(input)
                             .when()
                             .get();
@@ -88,7 +88,7 @@ public class RestAssuredUtils extends TestLibrary {
                 if(StringUtils.isNotEmpty(proxy)) {
 
                     response = given()
-                            .proxy("localhost",AppConstants.fiddlerPort)
+                            .proxy("localhost", GlobalConstants.fiddlerPort)
                             .spec(input)
                             .when()
                             .post();
@@ -134,7 +134,7 @@ public class RestAssuredUtils extends TestLibrary {
                 if(StringUtils.isNotEmpty(proxy)) {
 
                     response = given()
-                            .proxy("localhost",AppConstants.fiddlerPort)
+                            .proxy("localhost", GlobalConstants.fiddlerPort)
                             .spec(input)
                             .when()
                             .put();
@@ -180,7 +180,7 @@ public class RestAssuredUtils extends TestLibrary {
                 if(StringUtils.isNotEmpty(proxy)) {
 
                     response = given()
-                            .proxy("localhost",AppConstants.fiddlerPort)
+                            .proxy("localhost", GlobalConstants.fiddlerPort)
                             .spec(input)
                             .when()
                             .patch();
@@ -225,7 +225,7 @@ public class RestAssuredUtils extends TestLibrary {
                 if(StringUtils.isNotEmpty(proxy)) {
 
                     response = given()
-                            .proxy("localhost",AppConstants.fiddlerPort)
+                            .proxy("localhost", GlobalConstants.fiddlerPort)
                             .spec(input)
                             .when()
                             .delete();

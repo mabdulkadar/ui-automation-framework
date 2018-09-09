@@ -1,6 +1,6 @@
 package com.demo.base;
 
-import com.demo.controllers.hellofresh.HelloFresh_ApplicationController;
+import com.demo.controllers.hellofresh.HelloFreshApplicationController;
 import com.demo.controllers.liveintent.LiveIntent_ApplicationController;
 import com.demo.controllers.payoneer.Payoneer_ApplicationController;
 import com.demo.controllers.trivago.Trivago_ApplicationController;
@@ -47,23 +47,23 @@ public class BaseScript extends SeleniumUtils {
 
                 /*Load configuration details*/
                 if (config == null) {
-                    config = new Configuration(AppConstants.strConfigFileName);
-                    AppConstants.applicationURL = config.getConfiguration("applicationURL");
+                    config = new Configuration(GlobalConstants.strConfigFileName);
+                    GlobalConstants.applicationURL = config.getConfiguration("applicationURL");
 
                 }
 
                 switch (Helper.getOS()) {
                     case "win":
-                        System.setProperty("webdriver.chrome.driver", AppConstants.WinChromeDriverPath);
-                        System.setProperty("webdriver.gecko.driver", AppConstants.WinGeckoDriverPath);
+                        System.setProperty("webdriver.chrome.driver", GlobalConstants.WinChromeDriverPath);
+                        System.setProperty("webdriver.gecko.driver", GlobalConstants.WinGeckoDriverPath);
                         break;
                     case "mac":
-                        System.setProperty("webdriver.chrome.driver", AppConstants.MacChromeDriverPath);
-                        System.setProperty("webdriver.gecko.driver", AppConstants.MacGeckoDriverPath);
+                        System.setProperty("webdriver.chrome.driver", GlobalConstants.MacChromeDriverPath);
+                        System.setProperty("webdriver.gecko.driver", GlobalConstants.MacGeckoDriverPath);
                         break;
                     case "unix":
-                        System.setProperty("webdriver.chrome.driver", AppConstants.UnixChromeDriverPath);
-                        System.setProperty("webdriver.gecko.driver", AppConstants.UnixGeckoDriverPath);
+                        System.setProperty("webdriver.chrome.driver", GlobalConstants.UnixChromeDriverPath);
+                        System.setProperty("webdriver.gecko.driver", GlobalConstants.UnixGeckoDriverPath);
                         break;
 
                     default:
@@ -187,21 +187,23 @@ public class BaseScript extends SeleniumUtils {
     /**
      * Object - Hellofresh Application Testing
      */
-    HelloFresh_ApplicationController helloFresh= null;
-    public HelloFresh_ApplicationController helloFresh()
+    HelloFreshApplicationController helloFresh= null;
+    public HelloFreshApplicationController helloFresh()
     {
         if(helloFresh ==  null) {
-            helloFresh = new HelloFresh_ApplicationController(driver);
+            helloFresh = new HelloFreshApplicationController(driver);
         }
 
         return helloFresh;
     }
 
     @AfterSuite
-    public void TearDownSuite() throws Exception
+    public void TearDownSuite()
     {
         //Close the Driver
-        driver.quit();
+        if(driver != null) {
+            driver.quit();
+        }
 
     }
 }

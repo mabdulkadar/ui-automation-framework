@@ -1,5 +1,7 @@
 package com.demo.utilities;
 
+import com.demo.testreport.TestCaseId;
+
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -46,5 +48,58 @@ public class Helper {
         	System.out.println(micros);*/
 
         return String.valueOf(micros);
+    }
+
+    public static String getStringValue(Object input){
+
+        if(input != null){
+
+            if(input instanceof Integer){
+                return Integer.toString((int)input);
+            }else if(input instanceof String){
+                return (String)input;
+
+            }else if(input instanceof Long){
+                return Long.toString(((long)input));
+
+            }else if(input instanceof Float){
+                return Float.toString((float)input);
+
+
+            }else if(input instanceof Double){
+                return Double.toString((Double)input);
+
+            }else if(input instanceof Boolean){
+                return Boolean.toString((boolean)input);
+
+            }
+            else{
+                return null;
+            }
+        }
+
+        return null;
+
+    }
+
+    public static Object[][] populateTestCaseId(Object[][] inputArray){
+        int rowCount = inputArray.length;
+        int columnCount = inputArray[0].length;
+
+        Object[][] outputArray = new Object[rowCount][columnCount];
+
+        for (int row = 0; row < inputArray.length; row++) {
+            for (int col = 0; col < inputArray[row].length; col++) {
+                if(col == 0){
+                    String testCaseName = (String) inputArray[row][col];
+                    TestCaseId testCaseId = new TestCaseId();
+                    testCaseId.setTestName(testCaseName);
+                    outputArray[row][col] = testCaseId;
+                }else{
+                    outputArray[row][col] = inputArray[row][col];
+                }
+            }
+        }
+        return outputArray;
     }
 }

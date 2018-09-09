@@ -4,9 +4,33 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 
-public class SignInPage {
+public class AuthenticationPage {
 
-    //New Sign Up Details Objects
+    @FindBy(how= How.CLASS_NAME,using="login")
+    public WebElement signIn_Link;
+
+    //Already Registered User Objects
+    @FindBy(how= How.ID,using="email")
+    public WebElement registered_emailAddress_TextField;
+
+    @FindBy(how= How.ID,using="passwd")
+    public WebElement registered_password_TextField;
+
+    @FindBy(how= How.ID,using="SubmitLogin")
+    public WebElement signIn_Button;
+
+
+
+    //Create New Account Objects
+    @FindBy(how= How.ID,using="email_create")
+    public WebElement emailAddress_TextField;
+
+    @FindBy(how= How.ID,using="SubmitCreate")
+    public WebElement create_an_account_Button;
+
+
+
+    //Create An Account Objects
     @FindBy(how= How.ID,using="id_gender2")
     public WebElement mrs_RadioButton;
 
@@ -72,6 +96,5 @@ public class SignInPage {
 
     @FindBy(how= How.CLASS_NAME,using="logout")
     public WebElement signOut_Link;
-
 
 }

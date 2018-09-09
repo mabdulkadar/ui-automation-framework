@@ -4,7 +4,7 @@ import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentHtmlReporter;
 import com.aventstack.extentreports.reporter.configuration.ChartLocation;
 import com.aventstack.extentreports.reporter.configuration.Theme;
-import com.demo.base.AppConstants;
+import com.demo.base.GlobalConstants;
 import com.demo.base.Configuration;
 
 import java.io.File;
@@ -40,12 +40,12 @@ public class ExtentManager {
 		try {
 			if (!Files.isDirectory(Paths.get(path))) {
 				Files.createDirectories(Paths.get(path));
-                AppConstants.screenshotPath = path;
+                GlobalConstants.screenshotPath = path;
 			}
 
 			/*if (!Files.isDirectory(Paths.get(screenShotPath))) {
 				Files.createDirectories(Paths.get(screenShotPath));
-				AppConstants.screenshotPath = screenShotPath;
+				GlobalConstants.screenshotPath = screenShotPath;
 			}*/
 
 		} catch (IOException e) {

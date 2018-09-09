@@ -1,6 +1,6 @@
 package com.demo.controllers.trivago;
 
-import com.demo.base.AppConstants;
+import com.demo.base.GlobalConstants;
 import com.demo.pages.trivago.ContactPage;
 import com.demo.pages.trivago.HomePage;
 import com.demo.utilities.TestLibrary;
@@ -23,7 +23,7 @@ public class Trivago_HomePageController extends TestLibrary {
 
     public void search(String searchStrValue) throws Exception{
 
-        launchURL(AppConstants.applicationURL);
+        launchURL(GlobalConstants.applicationURL);
         clickObject(homePage.searchIcon,"Search Icon");
         clickObject(homePage.searchInputField,"Search Input Field");
         typeValue(homePage.searchInputField,"search Input Field",searchStrValue);
@@ -42,7 +42,7 @@ public class Trivago_HomePageController extends TestLibrary {
 
     public void subscribeNewsLetter(String emailIdstr) {
 
-        launchURL(AppConstants.applicationURL);
+        launchURL(GlobalConstants.applicationURL);
         waitPageLoaded();
         scrollDownStillElementClickable(homePage.newsLetterCheckBox,"Newsletter Confirmation Check Box");
         clickObject(10,homePage.newsLetterCheckBox,"Newsletter Confirmation Check Box");
@@ -54,7 +54,7 @@ public class Trivago_HomePageController extends TestLibrary {
 
     public void subscribeNewsLetterForSameCookie(String emailIdstr){
 
-        //launchURL(AppConstants.applicationURL);
+        //launchURL(GlobalConstants.applicationURL);
         waitPageLoaded();
         verifyElementNotDisplayed(homePage.newsLetterCheckBox,"Newsletter Confirmation Check Box");
         verifyElementNotDisplayed(homePage.newsLetterEmailTextField,"Newsletter Email Text Field");
@@ -64,7 +64,7 @@ public class Trivago_HomePageController extends TestLibrary {
 
     public void nagivateToContactPage() throws Exception{
 
-        launchURL(AppConstants.applicationURL);
+        launchURL(GlobalConstants.applicationURL);
         scrollDownToBottom("Contact Link");
         clickLinkUsingHref(4,homePage._contactLink,"Contact Link");
         waitPageLoaded();
@@ -95,7 +95,7 @@ public class Trivago_HomePageController extends TestLibrary {
 
             currentBrowserUrl = getCurrentUrl();
 
-            if (StringUtils.equalsIgnoreCase(AppConstants.applicationURL+"/contact/", currentBrowserUrl)) {
+            if (StringUtils.equalsIgnoreCase(GlobalConstants.applicationURL+"/contact/", currentBrowserUrl)) {
 
                 closeActiveBroser();
                 switchTab(0, "Home Tab");

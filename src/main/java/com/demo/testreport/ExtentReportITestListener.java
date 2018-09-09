@@ -2,18 +2,9 @@ package com.demo.testreport;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
-import com.demo.base.AppConstants;
-import com.demo.utilities.Helper;
-import org.apache.commons.io.FileUtils;
-import org.openqa.selenium.OutputType;
-import org.openqa.selenium.TakesScreenshot;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
-
-import java.io.File;
-
-import static com.demo.base.BaseScript.driver;
 
 
 public class ExtentReportITestListener implements ITestListener {
@@ -45,14 +36,39 @@ public class ExtentReportITestListener implements ITestListener {
 	@Override
 	public synchronized void onTestStart(ITestResult result) {
 
-
+		//Get test case name
+		Object[] testCaseParameters = result.getParameters();
 		String testCaseName = result.getMethod().getMethodName();
+
+
+		for (Object testParameter : testCaseParameters) {
+
+			if (testParameter instanceof TestCaseId) {
+				testCaseName = getTestCaseName(testCaseName,testParameter);
+				break;
+			}else if(testParameter instanceof Object[]){
+
+				for(Object testParameter2 : (Object[]) testParameter){
+					if (testParameter2 instanceof TestCaseId) {
+						testCaseName = getTestCaseName(testCaseName,testParameter2);
+						break;
+					}
+				}
+			}
+
+		}
 
 		ExtentTest test = extent.createTest(testCaseName);
 		ExtentReportITestListener.test.set(test);
 		for (String group : result.getMethod().getGroups()) {
 			test.assignCategory(group);
 		}
+	}
+
+	public synchronized String getTestCaseName(String testCaseName,Object testParameter){
+
+		return (testCaseName = testCaseName + "_" + ((TestCaseId) testParameter).getTestName());
+
 	}
 
 

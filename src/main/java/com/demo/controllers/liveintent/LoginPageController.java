@@ -1,5 +1,5 @@
 package com.demo.controllers.liveintent;
-import com.demo.base.AppConstants;
+import com.demo.base.GlobalConstants;
 import com.demo.pages.liveintent.LoginPage;
 import com.demo.utilities.TestLibrary;
 import org.openqa.selenium.WebDriver;
@@ -23,7 +23,7 @@ public class LoginPageController extends TestLibrary {
 
     public void login(String emailAddressStr, String passwordStr){
 
-        launchURL(AppConstants.applicationURL);
+        launchURL(GlobalConstants.applicationURL);
         typeValue(loginPage.emailAddress_TextField,"email Address",emailAddressStr);
         typeValue(loginPage.password_TextField,"password",passwordStr);
         clickObject(2,loginPage.login_Button,"Login Button");

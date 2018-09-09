@@ -1,6 +1,6 @@
 package com.demo.base;
 
-public class AppConstants {
+public class GlobalConstants {
 
     public static final String strLocation = System.getProperty("user.dir");
     public static final String strEnv = System.getProperty("env");
@@ -15,6 +15,8 @@ public class AppConstants {
 
     private static final String strConfigLocation="/src/main/resources/config/";
     public static final String strConfigFileName=strLocation+strConfigLocation+strEnv+"_CONFIG.properties";
+
+    public static final String externalTestDataLocationStr=strLocation+"/src/test/resources/testdata/";
 
     public static String screenshotPath = null;
 

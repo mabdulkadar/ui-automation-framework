@@ -1,6 +1,6 @@
 package com.demo.utilities;
 
-import com.demo.base.AppConstants;
+import com.demo.base.GlobalConstants;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.openqa.selenium.*;
@@ -34,7 +34,7 @@ public class SeleniumUtils  extends TestLibrary {
 
                   String screenshname = Helper.generateRandomStringUUID() + ".png";
 
-                  screenshotPath = AppConstants.screenshotPath + "/" + screenshname;
+                  screenshotPath = GlobalConstants.screenshotPath + "/" + screenshname;
 
                   File screeshotFile = new File(screenshotPath);
 
@@ -42,6 +42,7 @@ public class SeleniumUtils  extends TestLibrary {
                           screeshotFile);
 
                   logScreenshot(message, screenshname);
+                  logFail(message);
                   System.out.println("screesnshot taken");
               }else{
                   logFail(message);
@@ -216,6 +217,72 @@ public class SeleniumUtils  extends TestLibrary {
     }
 
     /**
+     * CLICK DYNAMIC OBJECT With Multiple Attempts.
+     * @param noOfAttempts integer value to represent reattempt time
+     * @param objWebElement webElement
+     * @param strObjectName object Name
+     * @return boolean
+     */
+    public static Boolean clickObject(Integer noOfAttempts,String objWebElement, String valueToUseInObject,String strObjectName)  {
+
+
+        try {
+
+            objWebElement = objWebElement.replace("XXX",valueToUseInObject.trim());
+
+            (new WebDriverWait(driver, 45)).until(ExpectedConditions.elementToBeClickable(By.cssSelector(objWebElement))).click();
+            logPass(strObjectName+" has been successfully clicked.");
+            return true;
+        } catch (Exception objException) {
+
+            if(0 < noOfAttempts) {
+                clickObject (noOfAttempts,objWebElement, valueToUseInObject,strObjectName);
+
+            }else {
+
+                logFailWithScreenshot(strObjectName+" Object is not clicked. Exception : "+objException.getMessage());
+                return false;
+            }
+
+        }
+
+        return false;
+    }
+
+    /**
+     * CLICK DYNAMIC OBJECT With Multiple Attempts.
+     * @param noOfAttempts integer value to represent reattempt time
+     * @param objWebElement webElement
+     * @param strObjectName object Name
+     * @return boolean
+     */
+    public static Boolean clickRegularObject(Integer noOfAttempts,String objWebElement, String valueToUseInObject,String strObjectName)  {
+
+
+        try {
+
+            objWebElement = objWebElement.replace("XXX",valueToUseInObject.trim());
+
+            driver.findElement(By.cssSelector(objWebElement)).click();
+            logPass(strObjectName+" has been successfully clicked.");
+            return true;
+        } catch (Exception objException) {
+
+            if(0 < noOfAttempts) {
+                clickObject (noOfAttempts,objWebElement, valueToUseInObject,strObjectName);
+
+            }else {
+
+                logFailWithScreenshot(strObjectName+" Object is not clicked. Exception : "+objException.getMessage());
+                return false;
+            }
+
+        }
+
+        return false;
+    }
+
+    /**
      * CLICK ON First Link of Carousel Menu Card
      * @param selector string
      * @param cardNumber which number of the card to click
@@ -254,7 +321,7 @@ public class SeleniumUtils  extends TestLibrary {
 
         try {
 
-            (new WebDriverWait(driver, 15)).until(ExpectedConditions.elementToBeClickable(objWebElement));
+            (new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(objWebElement));
             objWebElement.click();
             logPass(strObjectName+" has been successfully clicked.");
         } catch (Exception objException) {
@@ -361,7 +428,7 @@ public class SeleniumUtils  extends TestLibrary {
 
         try {
 
-            (new WebDriverWait(driver, 5)).until(ExpectedConditions.elementToBeClickable(objWebElement));
+            (new WebDriverWait(driver, 10)).until(ExpectedConditions.elementToBeClickable(objWebElement));
             return true;
         } catch (Exception objException) {
 
@@ -434,13 +501,38 @@ public class SeleniumUtils  extends TestLibrary {
     public static Boolean verifyElementVisible(WebElement objWebElement, String strObjectName) {
         try {
 
-            (new WebDriverWait(driver, 15)).until(ExpectedConditions.visibilityOf(objWebElement));
+            (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(objWebElement));
             logPass(strObjectName+" element is visible.");
             return true;
         } catch (Exception objException) {
             logFailWithScreenshot(strObjectName+" element is not visible. Exception : "+objException.getMessage());
             return false;
         }
+    }
+
+    /**
+     * Verify Element is Mot Visible.
+     * @param objWebElement web element
+     * @param strObjectName object name
+     */
+    public static void verifyElementDisplayed(WebElement objWebElement, String strObjectName) {
+
+        try {
+
+            Boolean actualStatus = objWebElement.isDisplayed();
+
+            if(actualStatus){
+                logPass(strObjectName+" element is displayed.");
+
+
+            }else{
+                logFailWithScreenshot(strObjectName+" element is not displayed.");
+            }
+        } catch (Exception objException) {
+            logFailWithScreenshot(strObjectName+" element is display through exception. Exception : "+objException.getMessage());
+        }
+
+
     }
 
 
@@ -466,6 +558,57 @@ public class SeleniumUtils  extends TestLibrary {
         }
 
 
+    }
+
+    /**
+     * Verify Element is visible and Check Text Value
+     * @param objWebElement webElement
+     * @param strObjectName objectName
+     * @param expectedValue String value
+     * @return boolean value
+     */
+    public static Boolean verifyTextInWebElement(WebElement objWebElement, String strObjectName,String expectedValue) {
+
+        String actualValue = null;
+
+        try {
+
+            actualValue = (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(objWebElement)).getText();
+
+            if(StringUtils.contains(actualValue,expectedValue)){
+                logPass(strObjectName+" is displayed.");
+                return true;
+            }else{
+                logFailWithScreenshot(strObjectName+" is not displayed.");
+                return false;
+            }
+
+        } catch (Exception objException) {
+            logFailWithScreenshot(strObjectName+" element is not visible. Exception : "+objException.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Get Text From Webelement
+     * @param objWebElement webElement
+     * @param strObjectName objectName
+     * @return String value
+     */
+    public static String getTextFromWebElement(WebElement objWebElement, String strObjectName) {
+
+        String actualValue = null;
+
+        try {
+
+            actualValue = (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(objWebElement)).getText();
+
+            return actualValue;
+
+        } catch (Exception objException) {
+            logFailWithScreenshot("Not Able to Get Text from "+strObjectName+" . Exception : "+objException.getMessage());
+            return actualValue;
+        }
     }
 
 
@@ -608,54 +751,47 @@ public class SeleniumUtils  extends TestLibrary {
     }
 
     /**
-     * Objective - Select a WebElement from multiple WebElement Lists
-     * @param strObjectName name of WebElement object
-     * @param elementValue actual element value to be selected
-     * @return boolean value
+     * SELECT A FROM DROP DOWN BY VALUE
+     * @param objWebElement Web Element Object
+     * @param strObjectName Web Element Name
+     * @param valueToBeSelectedStr String Value
      */
-
-    public static Boolean selectWebElement2(int noOfAttempts,String strObjectName,String elementValue) {
-
-        List<WebElement> webElementLists = null;
-        Iterator<WebElement> itr = null;
-        WebElement link = null;
-
+    public static void selectByValueFromDropDown(WebElement objWebElement, String strObjectName, String valueToBeSelectedStr)  {
 
 
         try {
 
-            if(StringUtils.isNotEmpty(elementValue)){
-                strObjectName = strObjectName.replace("XXX",elementValue);
-            }
-
-
-            webElementLists = driver.findElements(By.cssSelector(strObjectName));
-
-            itr = webElementLists.iterator();
-
-            while (itr.hasNext()){
-
-
-
-                System.out.println(link.getLocation());
-
-            }
-
-            return true;
+            Select select = new Select(objWebElement);
+            select.selectByValue(valueToBeSelectedStr.trim());
+            logPass(strObjectName+" "+valueToBeSelectedStr+" has been successfully selected.");
         } catch (Exception objException) {
 
-            if(0 < noOfAttempts) {
-                selectWebElement2((noOfAttempts-1),elementValue,  strObjectName);
+            logFailWithScreenshot(strObjectName+" "+valueToBeSelectedStr+" has not been successfully selected. Exception : "+objException.getMessage());
 
-            }else {
-
-                logFailWithScreenshot(strObjectName + " WebElement is not selected : " + objException.getMessage());
-                return false;
-            }
         }
-
-        return false;
     }
+
+    /**
+     * SELECT A FROM DROP DOWN BY VISIBLE TEXT
+     * @param objWebElement Web Element Object
+     * @param strObjectName Web Element Name
+     * @param valueToBeSelectedStr String Value
+     */
+    public static void selectByVisibleTextFromDropDown(WebElement objWebElement, String strObjectName, String valueToBeSelectedStr)  {
+
+
+        try {
+
+            Select select = new Select(objWebElement);
+            select.selectByVisibleText(valueToBeSelectedStr.trim());
+            logPass(strObjectName+" "+valueToBeSelectedStr+" has been successfully selected.");
+        } catch (Exception objException) {
+
+            logFailWithScreenshot(strObjectName+" "+valueToBeSelectedStr+" has not been successfully selected. Exception : "+objException.getMessage());
+
+        }
+    }
+
 
 
 
@@ -989,6 +1125,38 @@ public class SeleniumUtils  extends TestLibrary {
             logFailWithScreenshot(strObjectName+" MouseHover not performed. Exception : "+objException.getMessage());
             return false;
 
+        }
+    }
+
+
+    /**
+     * Check Two Strings contains matching values
+     * @param message String value to print in the report
+     * @param expectedValue Expected string value
+     * @param actualValue Actual string value
+     * @return boolean
+     */
+    public static Boolean verifyStringContainsMatchingValue(String message,Object expectedValue,Object actualValue) {
+
+        try {
+
+            if ((expectedValue instanceof String) && (actualValue instanceof String)){
+
+                if(StringUtils.contains((String)expectedValue,(String)actualValue)){
+                    logPass(message+" is matching.");
+                    return true;
+                }else{
+                    logFail(message+" is not matching. Expected Value:"+(String)expectedValue+" exists in "+(String)actualValue);
+                    return false;
+                }
+            }else{
+                logFail("Values are not String Object.");
+                return false;
+            }
+
+        } catch (Exception objException) {
+            logFail("Exception while comparing values "+objException.getMessage());
+            return false;
         }
     }
 
