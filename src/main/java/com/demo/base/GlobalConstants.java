@@ -20,9 +20,11 @@ public class GlobalConstants {
 
     public static String screenshotPath = null;
 
-    public static String applicationURL = null;
 
-    public static Integer noOfSeleniumActionAttempts=1;
+    //Application details
+    public static String applicationURL = null;
+    public static String apiBaseUri = null;
+
 
     public static int fiddlerPort=8888;
 }

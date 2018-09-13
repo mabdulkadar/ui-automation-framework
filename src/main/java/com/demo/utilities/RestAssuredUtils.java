@@ -24,15 +24,15 @@ public class RestAssuredUtils extends TestLibrary {
      * Object Make GET Call
      * @param messageToPrint message to Print in the Report
      * @param headerMap key,value maps of headers
+     * @param queryMap key,value maps of query parameter
      * @param baseUri base Uri of the Service
      * @param urlPath url Path of the Service
-     * @param proxy To monitor the Traffic in Fiddler
+     * @param proxy node value
      * @return Response Object
      */
     public static Response apiGetCall(String messageToPrint,
                                       HashMap<String,String> headerMap,HashMap<String,String> queryMap,
-                                      String baseUri, String urlPath,
-                                      String proxy){
+                                      String baseUri, String urlPath, String proxy){
 
         RequestSpecification input = buildRequestSpecification(headerMap,queryMap,
                 baseUri, urlPath, null);
@@ -44,18 +44,17 @@ public class RestAssuredUtils extends TestLibrary {
                     response = given()
                             .proxy("localhost", GlobalConstants.fiddlerPort)
                             .spec(input)
-                            .when()
-                            .get();
+                            .when().get();
                 }else{
                     response = given()
                             .spec(input)
                             .when()
                             .get();
-                    logPass("GET CALL Success for Service URL :"+input.get());
+                    logPass(messageToPrint+" : GET CALL Success for Service URL :"+input.get());
                 }
             } catch (Exception e) {
-                e.getMessage();
-                logerror("Exception in GET CALL with exception for Service URL :"+input.get()+"     Exception: " + e.getMessage());
+
+                //logerror(messageToPrint+" :Exception in GET CALL with exception for Service URL :"+input.get()+"     Exception: " + e.getMessage());
             }
 
         } else {
@@ -69,6 +68,7 @@ public class RestAssuredUtils extends TestLibrary {
      * Object Make POST Call
      * @param messageToPrint message to Print in the Report
      * @param headerMap key,value maps of headers
+     * @param queryMap key,value maps of query parameter
      * @param baseUri base Uri of the Service
      * @param urlPath url Path of the Service
      * @param inputReqStr input request content as json/xml
@@ -100,8 +100,8 @@ public class RestAssuredUtils extends TestLibrary {
                     logPass("POST CALL Success for Service URL :"+input.get());
                 }
             } catch (Exception e) {
-                e.getMessage();
-                logerror("Exception in POST CALL with exception for Service URL :"+input.get()+"     Exception: " + e.getMessage());
+                //e.getMessage();
+                //logerror("Exception in POST CALL with exception for Service URL :"+input.get()+"     Exception: " + e.getMessage());
             }
 
         } else {
@@ -115,6 +115,7 @@ public class RestAssuredUtils extends TestLibrary {
      * Object Make PUT Call
      * @param messageToPrint message to Print in the Report
      * @param headerMap key,value maps of headers
+     * @param queryMap key,value maps of query parameter
      * @param baseUri base Uri of the Service
      * @param urlPath url Path of the Service
      * @param inputReqStr input request content as json/xml
@@ -161,6 +162,7 @@ public class RestAssuredUtils extends TestLibrary {
      * Object Make PATCH Call
      * @param messageToPrint message to Print in the Report
      * @param headerMap key,value maps of headers
+     * @param queryMap key,value maps of query parameter
      * @param baseUri base Uri of the Service
      * @param urlPath url Path of the Service
      * @param inputReqStr input request content as json/xml
@@ -207,6 +209,7 @@ public class RestAssuredUtils extends TestLibrary {
      * Object Make DELETE Call
      * @param messageToPrint message to Print in the Report
      * @param headerMap key,value maps of headers
+     * @param queryMap key,value maps of query parameter
      * @param baseUri base Uri of the Service
      * @param urlPath url Path of the Service
      * @param proxy To monitor the Traffic in Fiddler
@@ -254,7 +257,7 @@ public class RestAssuredUtils extends TestLibrary {
      * @param res - Reponse Object
      * @return - Reponse Content String
      */
-    public String getResponseContent(Response res){
+    public static String getResponseContent(Response res){
 
         try {
             return res.getBody().asString();
@@ -271,7 +274,7 @@ public class RestAssuredUtils extends TestLibrary {
      * @param headerName - header key to be retrieved from the Response
      * @return - Response Content String
      */
-    public String getReponseHeader(Response res,String headerName){
+    public static String getReponseHeader(Response res,String headerName){
 
         try {
             return res.getHeader(headerName);
@@ -285,6 +288,7 @@ public class RestAssuredUtils extends TestLibrary {
     /**
      * Objective - Create Request Specification Object for Input of any Rest Assured Http Requests
      * @param headerMap key,value maps of headers
+     * @param queryMap key,value maps of query parameter
      * @param baseUri base Uri of the Service
      * @param urlPath url Path of the Service
      * @param inputReqStr input request content as json/xml
@@ -295,7 +299,7 @@ public class RestAssuredUtils extends TestLibrary {
 
         RequestSpecBuilder builder = new RequestSpecBuilder();
 
-        if(!headerMap.isEmpty()){
+        if((headerMap != null) && !(headerMap.isEmpty())){
 
             for(String headerKey : headerMap.keySet()){
                 builder.addHeader(headerKey,headerMap.get(headerKey));
@@ -303,7 +307,7 @@ public class RestAssuredUtils extends TestLibrary {
 
         }
 
-        if(!queryMap.isEmpty()) {
+        if((queryMap != null) &&  !(queryMap.isEmpty())) {
 
             for (String queryParmKey : queryMap.keySet()) {
                 builder.addQueryParam(queryParmKey, queryMap.get(queryParmKey));
@@ -312,7 +316,10 @@ public class RestAssuredUtils extends TestLibrary {
 
         builder.setBaseUri(baseUri);
         builder.setBasePath(urlPath);
-        builder.setBody(inputReqStr);
+
+        if(StringUtils.isNotEmpty(inputReqStr)) {
+            builder.setBody(inputReqStr);
+        }
 
         return builder.build();
 
@@ -325,14 +332,14 @@ public class RestAssuredUtils extends TestLibrary {
      * @param expectedStatusCode status Code to compare with Actual Status Code
      * @return boolean
      */
-    public static Boolean verifyHttpStatusCodeInResponse(Response response,Integer expectedStatusCode){
+    public static Boolean verifyHttpStatusCodeInResponse(Response response,String expectedStatusCode){
 
         if(response != null){
-            if(response.getStatusCode() == expectedStatusCode){
+            if(response.getStatusCode() == Integer.valueOf(expectedStatusCode)){
                 logPass("Status Code is Matching");
                 return true;
             }else{
-                logFail("Status Code is not Matching. Exepected:"+expectedStatusCode+", ActualStatusCode:"+response.getStatusCode());
+                logFail("Status Code is not Matching. Expected:"+expectedStatusCode+", ActualStatusCode:"+response.getStatusCode());
                 return false;
             }
         }else{
@@ -360,8 +367,5 @@ public class RestAssuredUtils extends TestLibrary {
         }
 
     }
-
-
-
 
 }

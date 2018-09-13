@@ -117,10 +117,10 @@ public class ExcelUtility {
 
     /**
      * Objective - Method to get TestCaseId object from TestCaseId column in excel file
-     * @param FilePath
-     * @param SheetName
-     * @return
-     * @throws Exception
+     * @param FilePath Excel filePath to read
+     * @param SheetName Excel sheet name
+     * @return Object as array
+     * @throws Exception if file not available
      */
     public static Object[][] getDataAsArrayWithTestCaseId(String FilePath, String SheetName) throws Exception {
 

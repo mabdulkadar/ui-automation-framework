@@ -1,7 +1,9 @@
 package com.demo.utilities;
 
 import com.demo.testreport.TestCaseId;
+import org.apache.commons.lang3.StringUtils;
 
+import java.util.HashMap;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -10,7 +12,7 @@ public class Helper {
 
     /**
      * Get OS info
-     * @return
+     * @return string value of system OS
      */
     public static String getOS(){
 
@@ -102,4 +104,46 @@ public class Helper {
         }
         return outputArray;
     }
+
+    public static String replaceMacros(String inputStr, HashMap<String,String> inputMap){
+
+        if(inputMap != null) {
+
+            for (String key : inputMap.keySet()) {
+                inputStr = inputStr.replace("{{" + key + "}}", inputMap.get(key));
+            }
+        }
+
+        return inputStr;
+
+    }
+
+
+    /**
+     * Objective --  convert string into map
+     * @param inputdata String value , it should be like key1:value1;key2:value2
+     * @return hashmap value
+     */
+    public static HashMap<String,String> convertStringToMap(String inputdata){
+
+        HashMap<String,String> resultMap = null;
+        String key = null;
+        String value = null;
+
+        if(StringUtils.isNotEmpty(inputdata)){
+
+            resultMap = new HashMap<String,String>();
+
+            for(int i=0;i<inputdata.split("\\,").length;i++){
+                key = inputdata.split("\\,")[i].split("\\:")[0].trim();
+                value = inputdata.split("\\,")[i].split("\\:")[1].trim();
+                resultMap.put(key,value);
+            }
+
+        }
+
+        return resultMap;
+    }
+
+
 }

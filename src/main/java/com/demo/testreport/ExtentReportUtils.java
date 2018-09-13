@@ -1,20 +1,16 @@
 package com.demo.testreport;
 
-import com.aventstack.extentreports.MediaEntityBuilder;
-import com.aventstack.extentreports.MediaEntityModelProvider;
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.markuputils.Markup;
 import com.demo.utilities.SeleniumUtils;
+import com.demo.utilities.TestLibrary;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import java.io.IOException;
 
-import static com.aventstack.extentreports.MediaEntityBuilder.*;
 
 public class ExtentReportUtils {
 
-    public static Log log = LogFactory.getLog(SeleniumUtils.class);
+    public static Log log = LogFactory.getLog(TestLibrary.class);
 
     public static void logmsg(String msg) {
         log.info(msg);

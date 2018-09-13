@@ -17,12 +17,10 @@ import java.util.List;
 public class SeleniumUtils  extends TestLibrary {
 
 
-
-
     /**
      * TAKE SCREENSHOT
+     * @param message  string value
      */
-    String screenshname = null;
     public static void logFailWithScreenshot(String message) {
 
         String screenshotPath = null;
@@ -220,6 +218,7 @@ public class SeleniumUtils  extends TestLibrary {
      * CLICK DYNAMIC OBJECT With Multiple Attempts.
      * @param noOfAttempts integer value to represent reattempt time
      * @param objWebElement webElement
+     * @param valueToUseInObject String value to replace in object string
      * @param strObjectName object Name
      * @return boolean
      */
@@ -253,6 +252,7 @@ public class SeleniumUtils  extends TestLibrary {
      * CLICK DYNAMIC OBJECT With Multiple Attempts.
      * @param noOfAttempts integer value to represent reattempt time
      * @param objWebElement webElement
+     * @param valueToUseInObject string value to replace in object String vale
      * @param strObjectName object Name
      * @return boolean
      */
@@ -636,6 +636,7 @@ public class SeleniumUtils  extends TestLibrary {
 
     /**
      * Objective - Click the Link using Href value
+     * @param noOfAttempts number of attempts
      * @param hrefValue is actual link i.e href value
      * @param strObjectName name of Label
      * @return boolean value
@@ -691,6 +692,7 @@ public class SeleniumUtils  extends TestLibrary {
 
     /**
      * Objective - Select a WebElement from multiple WebElement Lists
+     * @param noOfAttempts no of attempts
      * @param strObjectName name of WebElement object
      * @param elementValue actual element value to be selected
      * @return boolean value
