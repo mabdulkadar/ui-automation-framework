@@ -691,7 +691,7 @@ public class SeleniumUtils  extends TestLibrary {
 
 
     /**
-     * Objective - Select a WebElement from multiple WebElement Lists
+     * Objective - Select a WebElement from multiple WebElement List
      * @param noOfAttempts no of attempts
      * @param strObjectName name of WebElement object
      * @param elementValue actual element value to be selected
