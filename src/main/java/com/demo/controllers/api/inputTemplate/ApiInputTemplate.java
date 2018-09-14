@@ -12,11 +12,29 @@ public class ApiInputTemplate {
             "  \"alpha3_code\": \"{{alpha3_code}}\"\n" +
             "}";
 
+    private static String POST_REQ_WITHOUTNAMEFIELD="{\n" +
+            "  \"alpha2_code\": \"{{alpha2_code}}\",\n" +
+            "  \"alpha3_code\": \"{{alpha3_code}}\"\n" +
+            "}";
+
+    private static String POST_REQ_WITHOUTALPHA2CODE="{\n" +
+            "  \"name\": \"{{name}}\",\n" +
+            "  \"alpha3_code\": \"{{alpha3_code}}\"\n" +
+            "}";
+
+    private static String POST_REQ_WITHOUTALPHA3CODE="{\n" +
+            "  \"name\": \"{{name}}\",\n" +
+            "  \"alpha2_code\": \"{{alpha2_code}}\"\n" +
+            "}";
+
     private static HashMap<String, String> map = null;
     public static void initializer(){
         if(map == null){
             map = new HashMap<String, String>();
             map.put("POST_REQ_01", POST_REQ_01);
+            map.put("POST_REQ_WITHOUTNAMEFIELD", POST_REQ_WITHOUTNAMEFIELD);
+            map.put("POST_REQ_WITHOUTALPHA2CODE", POST_REQ_WITHOUTALPHA2CODE);
+            map.put("POST_REQ_WITHOUTALPHA3CODE", POST_REQ_WITHOUTALPHA3CODE);
 
         }
 

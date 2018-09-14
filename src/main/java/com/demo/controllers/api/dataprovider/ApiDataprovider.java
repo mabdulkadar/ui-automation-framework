@@ -30,4 +30,11 @@ public class ApiDataprovider {
         return ExcelUtility.getDataAsArrayWithTestCaseId(testCaseLocation+accountTestDataFileName,"NewCountryTestData");
 
     }
+
+    @DataProvider(name = "NewCountryTestDataNegative")
+    public static Object[][] getcreateNewCountryNegativeTestData() throws Exception{
+
+        return ExcelUtility.getDataAsArrayWithTestCaseId(testCaseLocation+accountTestDataFileName,"NewCountryTestDataNegative");
+
+    }
 }
