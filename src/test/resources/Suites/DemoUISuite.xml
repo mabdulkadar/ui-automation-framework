@@ -9,19 +9,18 @@
 	</listeners>
 
 
-	<test name="Api">
+	<test name="Account">
 		<groups>
 			<run>
-				<include name="Country"></include>
+				<include name="Account"></include>
 			</run>
 		</groups>
 		<classes>
-			<class name="com.demo.test.api.ApiGetTest">
+			<class name="com.demo.test.hellofresh.AccountTest">
 				<methods>
-					<include name="getAllCountriesTest"></include>
-					<include name="getCountryByIdTest"></include>
-					<exclude name="createNewCountryTest"></exclude>
-					<exclude name="createNewCountryNegativeTest"></exclude>
+					<include name="signInTest"></include>
+					<include name="logInTest"></include>
+					<include name="checkoutTest"></include>
 				</methods>
 			</class>
 		</classes>

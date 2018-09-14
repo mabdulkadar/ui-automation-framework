@@ -63,4 +63,26 @@ public class ApiGetTest extends BaseScript {
 
 
     }
+
+    @Test(testName="Get Country",groups = { "Country","Regression" },
+            description="Create New Country using Post call.",
+            dataProvider = "NewCountryTestDataNegative",dataProviderClass = ApiDataprovider.class)
+    public void createNewCountryNegativeTest(TestCaseId testCasdId,String TestCaseDescription,
+                                     String inputData,String expectedStatusCode){
+
+        apiController.createNewCountryPostCall(TestCaseDescription,
+                GlobalConstants.apiBaseUri,"/country",inputData,expectedStatusCode);
+
+        logmsg("Compare the Post call Api Response as empty.");
+        apiController.compareJsonStrings("{}",apiController.actualApiResponse);
+
+        logmsg("Make /country/get/iso2code/<alpla_cod_ value> to check data not persist in database.");
+        apiController.getCall(TestCaseDescription,
+                GlobalConstants.apiBaseUri,"/country/get/iso2code/"+apiController.alpha2_code,"200");
+
+        logmsg("Compare the result of Get call Response as empty for the country not created.");
+        apiController.compareApiResponseResultObject("{}",apiController.expectedResult);
+
+
+    }
 }
