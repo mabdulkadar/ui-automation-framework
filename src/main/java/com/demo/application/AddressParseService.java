@@ -2,6 +2,7 @@ package com.demo.application;
 
 import com.demo.utilities.JacksonConversion;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +20,12 @@ public class AddressParseService {
      */
     public String parseGermanAddressStringToJSONString(String inputAddressStr) throws JsonProcessingException {
 
-        return getAddresses(PATTERN_1,inputAddressStr);
+
+        if(StringUtils.isNotEmpty(inputAddressStr)) {
+            return getAddresses(PATTERN_1, inputAddressStr);
+        }else{
+            return "Input String is empty";
+        }
     }
 
 
