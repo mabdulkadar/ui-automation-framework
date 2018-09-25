@@ -5,7 +5,6 @@ import com.demo.controllers.liveintent.LiveIntent_ApplicationController;
 import com.demo.controllers.payoneer.Payoneer_ApplicationController;
 import com.demo.controllers.trivago.Trivago_ApplicationController;
 import com.demo.utilities.Helper;
-import com.demo.utilities.SeleniumUtils;
 import com.demo.utilities.TestLibrary;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import org.apache.commons.lang3.StringUtils;
@@ -37,6 +36,8 @@ public class BaseScript extends TestLibrary {
      */
     public BaseScript(){
 
+        final ThreadLocal threadLocal = new ThreadLocal();
+
         if(driver == null) {
 
             WebDriver localDriver = null;
@@ -44,7 +45,8 @@ public class BaseScript extends TestLibrary {
             try {
 
                 /*Load configuration details*/
-                if (config == null) {
+                if ((config == null && StringUtils.isNotEmpty(GlobalConstants.strEnv))) {
+
                     config = new Configuration(GlobalConstants.strConfigFileName);
                     GlobalConstants.applicationURL = config.getConfiguration("applicationURL");
                     GlobalConstants.apiBaseUri = config.getConfiguration("apiBaseUri");
@@ -86,6 +88,7 @@ public class BaseScript extends TestLibrary {
                                 //localDriver = new FirefoxDriver(firefoxprofile);
                                 localDriver = new FirefoxDriver();
                                 localDriver.manage().window().maximize();
+                                threadLocal.set(localDriver);
                                 break;
                             }
 

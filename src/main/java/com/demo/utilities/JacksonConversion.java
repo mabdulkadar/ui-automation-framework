@@ -3,6 +3,7 @@ package com.demo.utilities;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -21,12 +22,12 @@ public class JacksonConversion {
         if(mapper == null) {
             this.mapper = new ObjectMapper();
             this.mapper.configure(MapperFeature.USE_ANNOTATIONS, false);
-            this.mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
-            this.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+            //this.mapper.setSerializationInclusion(JsonInclude.Include.NON_EMPTY);
+            //this.mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         }
     }
 
-    public static HashMap<String, String> convertStringInToMap(String strValue ){
+    public  HashMap<String, String> convertStringInToMap(String strValue ){
 
 
         HashMap<String, String> map =null;
@@ -48,6 +49,19 @@ public class JacksonConversion {
         }
 
         return map;
+
+    }
+
+    public  String convertObjectToString(Object obj) throws JsonProcessingException {
+
+        String strResult = null;
+
+        if(obj != null) {
+            strResult = mapper.writeValueAsString(obj);
+        }
+
+        return strResult;
+
 
     }
 
