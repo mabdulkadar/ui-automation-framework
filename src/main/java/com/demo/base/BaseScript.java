@@ -2,6 +2,7 @@ package com.demo.base;
 
 import com.demo.controllers.hellofresh.HelloFreshApplicationController;
 import com.demo.controllers.liveintent.LiveIntent_ApplicationController;
+import com.demo.controllers.mercurytour.MercuryApplicationController;
 import com.demo.controllers.payoneer.Payoneer_ApplicationController;
 import com.demo.controllers.trivago.Trivago_ApplicationController;
 import com.demo.utilities.Helper;
@@ -198,6 +199,19 @@ public class BaseScript extends TestLibrary {
         }
 
         return helloFresh;
+    }
+
+    /**
+     * Object - Mercury Application Testing
+     */
+    MercuryApplicationController mercuryFlighReservartion= null;
+    public MercuryApplicationController mercuryFlightReservationApp()
+    {
+        if(mercuryFlighReservartion ==  null) {
+            mercuryFlighReservartion = new MercuryApplicationController(driver);
+        }
+
+        return mercuryFlighReservartion;
     }
 
     @AfterSuite

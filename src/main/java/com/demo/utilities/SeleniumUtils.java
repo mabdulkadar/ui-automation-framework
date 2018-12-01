@@ -61,10 +61,6 @@ public class SeleniumUtils  extends TestLibrary {
 
             driver.get(strURL);
 
-        /*    if(driver.findElement(By.className("Cookie__button")).isEnabled()){
-                driver.findElement(By.className("Cookie__button")).click();
-            }*/
-
             return true;
         } catch (Exception objException) {
             logFailWithScreenshot("Not Able to Launch the URL:"+strURL+" Exception : "+objException.getMessage());
