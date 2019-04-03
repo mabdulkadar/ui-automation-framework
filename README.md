@@ -5,7 +5,7 @@
 * Page Object Model design pattern has been used in this project.
 
 
-## Getting Started
+## Getting Started the framework
 
 In order to get a copy of the project, clone the project from the respective git repository at your desired local path.
 
@@ -19,7 +19,7 @@ git clone https://github.com/sharikalatif/demo-ui-qa.git
 This project should be running on local environments after fulfilling the following Prerequisites
 
 ```
-1. Latest version of JDK 8. [TJDK 8] (http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)
+1. Latest version of JDK 8. [TJDK 8]
 2. Latest version of maven. [maven] (https://maven.apache.org/download.cgi)
 3. IDE of your choice. [Intellij] 
 
