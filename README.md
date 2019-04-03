@@ -4,17 +4,13 @@
 
 * Page Object Model design pattern has been used in this project.
 
-```
-
-```
-
 
 ## Getting Started
 
 In order to get a copy of the project, clone the project from the respective git repository at your desired local path.
 
 ```bash
-git clone https://github.com/mabdulkadar/demo-ui-qa.git
+git clone https://github.com/sharikalatif/demo-ui-qa.git
 
 ```
 
@@ -42,7 +38,6 @@ Note: maven pom.xml should take care of required version of the following:
 
 
 
-
 ## How To Run (Using Maven Command)
 ```bash
 from command line Use following command to run test: 
@@ -65,11 +60,7 @@ java -Denv=DEMO -DBrowser=firefox -jar target/demo-ui-qa-1.0-SNAPSHOT-fat-tests.
 from IDE: Right click TestNGSuite.xml file under ~/test/resources/Suites folder and pass parameters -Denv=DEMO -DBrowser=firefox
 ```
 
-
-
-
 ## Authors
 
 * **Sharik Latif** - *Initial work* -
-# demo-ui-qa
-# demo-ui-qa
+
