@@ -22,6 +22,7 @@ public class GlobalConstants {
 
 
     //Application details
+    public static String tempMailURL = null;
     public static String applicationURL = null;
     public static String apiBaseUri = null;
 

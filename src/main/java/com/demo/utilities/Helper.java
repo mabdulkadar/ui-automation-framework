@@ -1,9 +1,6 @@
 package com.demo.utilities;
 
-import com.demo.testreport.TestCaseId;
-import org.apache.commons.lang3.StringUtils;
-
-import java.util.HashMap;
+import java.awt.image.BufferedImage;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -52,98 +49,35 @@ public class Helper {
         return String.valueOf(micros);
     }
 
-    public static String getStringValue(Object input){
-
-        if(input != null){
-
-            if(input instanceof Integer){
-                return Integer.toString((int)input);
-            }else if(input instanceof String){
-                return (String)input;
-
-            }else if(input instanceof Long){
-                return Long.toString(((long)input));
-
-            }else if(input instanceof Float){
-                return Float.toString((float)input);
-
-
-            }else if(input instanceof Double){
-                return Double.toString((Double)input);
-
-            }else if(input instanceof Boolean){
-                return Boolean.toString((boolean)input);
-
-            }
-            else{
-                return null;
-            }
+    /**
+     * Compares two images pixel by pixel.
+     *
+     * @param imgA the first image.
+     * @param imgB the second image.
+     * @return whether the images are both the same or not.
+     */
+    public static boolean compareImages(BufferedImage imgA, BufferedImage imgB) {
+        // The images must be the same size.
+        if (imgA.getWidth() != imgB.getWidth() || imgA.getHeight() != imgB.getHeight()) {
+            return false;
         }
 
-        return null;
+        int width  = imgA.getWidth();
+        int height = imgA.getHeight();
 
-    }
-
-    public static Object[][] populateTestCaseId(Object[][] inputArray){
-        int rowCount = inputArray.length;
-        int columnCount = inputArray[0].length;
-
-        Object[][] outputArray = new Object[rowCount][columnCount];
-
-        for (int row = 0; row < inputArray.length; row++) {
-            for (int col = 0; col < inputArray[row].length; col++) {
-                if(col == 0){
-                    String testCaseName = (String) inputArray[row][col];
-                    TestCaseId testCaseId = new TestCaseId();
-                    testCaseId.setTestName(testCaseName);
-                    outputArray[row][col] = testCaseId;
-                }else{
-                    outputArray[row][col] = inputArray[row][col];
+        // Loop over every pixel.
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                // Compare the pixels for equality.
+                if (imgA.getRGB(x, y) != imgB.getRGB(x, y)) {
+                    return false;
                 }
             }
         }
-        return outputArray;
+
+        return true;
     }
 
-    public static String replaceMacros(String inputStr, HashMap<String,String> inputMap){
-
-        if(inputMap != null) {
-
-            for (String key : inputMap.keySet()) {
-                inputStr = inputStr.replace("{{" + key + "}}", inputMap.get(key));
-            }
-        }
-
-        return inputStr;
-
-    }
-
-
-    /**
-     * Objective --  convert string into map
-     * @param inputdata String value , it should be like key1:value1;key2:value2
-     * @return hashmap value
-     */
-    public static HashMap<String,String> convertStringToMap(String inputdata){
-
-        HashMap<String,String> resultMap = null;
-        String key = null;
-        String value = null;
-
-        if(StringUtils.isNotEmpty(inputdata)){
-
-            resultMap = new HashMap<String,String>();
-
-            for(int i=0;i<inputdata.split("\\,").length;i++){
-                key = inputdata.split("\\,")[i].split("\\:")[0].trim();
-                value = inputdata.split("\\,")[i].split("\\:")[1].trim();
-                resultMap.put(key,value);
-            }
-
-        }
-
-        return resultMap;
-    }
 
 
 }

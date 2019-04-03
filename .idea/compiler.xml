@@ -9,5 +9,8 @@
         <module name="demo-ui-qa" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="demo-ui-qa" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

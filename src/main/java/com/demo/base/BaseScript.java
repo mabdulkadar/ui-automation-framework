@@ -1,10 +1,6 @@
 package com.demo.base;
 
-import com.demo.controllers.hellofresh.HelloFreshApplicationController;
-import com.demo.controllers.liveintent.LiveIntent_ApplicationController;
-import com.demo.controllers.mercurytour.MercuryApplicationController;
-import com.demo.controllers.payoneer.Payoneer_ApplicationController;
-import com.demo.controllers.trivago.Trivago_ApplicationController;
+import com.demo.controllers.ApplicationController;
 import com.demo.utilities.Helper;
 import com.demo.utilities.TestLibrary;
 import com.gargoylesoftware.htmlunit.BrowserVersion;
@@ -50,6 +46,7 @@ public class BaseScript extends TestLibrary {
 
                     config = new Configuration(GlobalConstants.strConfigFileName);
                     GlobalConstants.applicationURL = config.getConfiguration("applicationURL");
+                    GlobalConstants.tempMailURL = config.getConfiguration("tempMailURL");
                     GlobalConstants.apiBaseUri = config.getConfiguration("apiBaseUri");
 
                 }
@@ -150,69 +147,19 @@ public class BaseScript extends TestLibrary {
 
 
     /**
-     * Object - Trivago Application Testing
+     * Object - www.xxx.com Application Testing
      */
-    Trivago_ApplicationController trivago= null;
-    public Trivago_ApplicationController trivago()
+    ApplicationController applicationController = null;
+    public ApplicationController applicationController()
     {
-        if(trivago ==  null) {
-            trivago = new Trivago_ApplicationController(driver);
+        if(applicationController ==  null) {
+            applicationController = new ApplicationController(driver);
         }
 
-        return trivago;
+        return applicationController;
     }
 
-    /**
-     * Object - Payoneer Application Testing
-     */
-    Payoneer_ApplicationController payoneer= null;
-    public Payoneer_ApplicationController payoneer()
-    {
-        if(payoneer ==  null) {
-            payoneer = new Payoneer_ApplicationController(driver);
-        }
 
-        return payoneer;
-    }
-
-    /**
-     * Object - LiveIntent Application Testing
-     */
-    LiveIntent_ApplicationController liveIntent= null;
-    public LiveIntent_ApplicationController liveIntent()
-    {
-        if(liveIntent ==  null) {
-            liveIntent = new LiveIntent_ApplicationController(driver);
-        }
-
-        return liveIntent;
-    }
-
-    /**
-     * Object - Hellofresh Application Testing
-     */
-    HelloFreshApplicationController helloFresh= null;
-    public HelloFreshApplicationController helloFresh()
-    {
-        if(helloFresh ==  null) {
-            helloFresh = new HelloFreshApplicationController(driver);
-        }
-
-        return helloFresh;
-    }
-
-    /**
-     * Object - Mercury Application Testing
-     */
-    MercuryApplicationController mercuryFlighReservartion= null;
-    public MercuryApplicationController mercuryFlightReservationApp()
-    {
-        if(mercuryFlighReservartion ==  null) {
-            mercuryFlighReservartion = new MercuryApplicationController(driver);
-        }
-
-        return mercuryFlighReservartion;
-    }
 
     @AfterSuite
     public void TearDownSuite()
