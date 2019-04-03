@@ -71,3 +71,4 @@ from IDE: Right click TestNGSuite.xml file under ~/test/resources/Suites folder 
 ## Authors
 
 * **Sharik Latif** - *Initial work* -
+# demo-ui-qa
