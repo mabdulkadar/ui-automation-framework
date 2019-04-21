@@ -10,7 +10,7 @@
 In order to get a copy of the project, clone the project from the respective git repository at your desired local path.
 
 ```bash
-git clone https://github.com/sharikalatif/demo-ui-qa.git
+git clone https://github.com//mabdulkadar/ui-automation-framework.git
 
 ```
 
@@ -41,7 +41,7 @@ Note: maven pom.xml should take care of required version of the following:
 ## How To Run (Using Maven Command)
 ```bash
 from command line Use following command to run test: 
-mvn clean test -Denv=DEMO -DBrowser=firefox -DsuiteXmlFile=src/test/resources/Suites/TestSuite.xml
+mvn clean test -Denv=DEMO
 mvn clean test -Denv=DEMO -DBrowser=chrome -DsuiteXmlFile=src/test/resources/Suites/TestSuite.xml
 mvn clean test -Denv=DEMO -DBrowser=headless -DsuiteXmlFile=src/test/resources/Suites/TestSuite.xml
 
@@ -62,5 +62,5 @@ from IDE: Right click TestNGSuite.xml file under ~/test/resources/Suites folder 
 
 ## Authors
 
-* **Sharik Latif** - *Initial work* -
+* **Mohamed Abdulkadar** - *Initial work* -
 
