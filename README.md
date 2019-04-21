@@ -44,7 +44,6 @@ from command line Use following command to run test:
 mvn clean test -Denv=DEMO -DBrowser=chrome -DsuiteXmlFile=src/test/resources/Suites/TestSuite.xml
 mvn clean test -Denv=DEMO -DBrowser=headless -DsuiteXmlFile=src/test/resources/Suites/TestSuite.xml
 
--DsuiteXmlFile=src/test/resources/Suites/TestSuite.xml is optional, you have different *.xml file, please use it.
 
 ```
 
