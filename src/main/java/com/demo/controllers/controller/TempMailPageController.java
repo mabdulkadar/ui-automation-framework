@@ -31,14 +31,13 @@ public class TempMailPageController extends TestLibrary {
 
     public void verifyYourAccountConfirmationInEmail(){
         logmsg("Verify the Website's Registration by Activating in the confirmation email.");
-        switchTab(0,"Temp Email Tab");
-        clickObject(2, tempMailPage.verificationEmailLink,"Verification Email Link");
-        clickObject(2, tempMailPage.verifyYourAccountLinkInEmail,"Verify Your Account Link");
+       // switchTab(0,"Temp Email Tab");
+        launchURL(GlobalConstants.tempMailURL);
+        scrollDownToElement(tempMailPage.emailView,"Email View");
+        clickObject(5, tempMailPage.verificationEmailLink,"Verification Email Link");
+        scrollDownToElement(tempMailPage.emailView,"Email View");
+        clickObject(5, tempMailPage.verifyYourAccountLinkInEmail,"Verify Your Account Link");
 
     }
-
-
-
-
 
 }

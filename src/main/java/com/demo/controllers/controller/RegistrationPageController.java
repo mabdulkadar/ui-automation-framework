@@ -28,7 +28,7 @@ public class RegistrationPageController extends TestLibrary {
     public void fillRegistrationForm(String name,String emailId,String password){
 
         logmsg("Fill Registration Form with all fields with valid values.");
-        openNewBrowerTab();
+       // openNewBrowerTab();
         launchURL(GlobalConstants.applicationURL);
         waitPageLoaded();
         clickObject(2, registrationPage.joinMeetupLink,"Join Meetup");

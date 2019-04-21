@@ -42,12 +42,12 @@ public class RegistrationTest extends BaseScript {
 
     }
 
-    @Test(groups = { "Registration" },dependsOnMethods={"verifyTC3_NewUserInformationInProfile"})
+   /* @Test(groups = { "Registration" },dependsOnMethods={"verifyTC3_NewUserInformationInProfile"})
     public void verifyTC4_NewUserRegistrationWithoutMandatoyFields(){
 
         applicationController().registrationPageController().fillRegistrationFormWithooutMandatoryFields();
         applicationController().registrationPageController().verifyRegistratioPageUrlIsActive("/register/");
         applicationController().registrationPageController().verifyErrorInformationForAllMandatoryFields();
 
-    }
+    }*/
 }

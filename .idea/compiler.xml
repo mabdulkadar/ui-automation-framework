@@ -6,11 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="demo-ui-qa" />
+        <module name="ui-automation-framework" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="demo-ui-qa" target="1.8" />
+      <module name="ui-automation-framework" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

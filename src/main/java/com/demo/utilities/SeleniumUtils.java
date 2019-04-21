@@ -298,7 +298,7 @@ public class SeleniumUtils  extends TestLibrary {
 
         try{
 
-            driver.findElement(new By.ByCssSelector("Body")).sendKeys(Keys.CONTROL + "t");
+            driver.findElement(new By.ByCssSelector("body")).sendKeys(Keys.CONTROL + "t");
 
             return true;
 
@@ -344,6 +344,30 @@ public class SeleniumUtils  extends TestLibrary {
 
 
     }
+
+    /**
+     * Objective - Scroll Down page to Bottom of page
+     * @param element  - WebElement to scroll
+     * @param objectName - object name
+     * @return boolean value
+     */
+
+    public static Boolean scrollDownToElement(WebElement element,String objectName) {
+
+        JavascriptExecutor js = null;
+
+        try {
+            js = (JavascriptExecutor)driver;;
+            js.executeScript("arguments[0].scrollIntoView(true);", element);
+            logPass("Scrolled Down to Bottom of Page");
+            return true;
+        } catch (Exception objException) {
+            objException.printStackTrace();
+            logFailWithScreenshot("Scrolled Down to Bottom of Page is failed");
+            return false;
+        }
+    }
+
 
 
 

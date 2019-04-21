@@ -20,7 +20,7 @@ public class WelcomePageController extends TestLibrary {
 
     public void uploadProfileLogo(String filepath){
         logmsg("Upload the profile logo picture.");
-        switchTab(1,"Meetup Welcome Page");
+        //switchTab(1,"Meetup Welcome Page");
         waitPageLoaded();
         uploadFile(welcomePage.uplLoadAPhotoLink, "Upload Photo Link", filepath);
         clickObject(2, welcomePage.useThisPhotonButton,"Use This Photon Button");
